@@ -1,0 +1,23 @@
+:root {
+  --cl-pure-gold: #ECDBA4;
+  --cl-white-gold: #EAE6BB;
+  --cl-ivory: #F1E9D7;
+  --cl-dusky-grey: #242424;
+
+  --cl-primary: var(--cl-pure-gold);
+  --cl-secondary: var(--cl-ivory);
+  --cl-page-bg: var(--cl-dusky-grey);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--cl-page-bg);
+  color: var(--cl-secondary);
+}
