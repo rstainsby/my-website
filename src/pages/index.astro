@@ -1,5 +1,7 @@
 ---
-
+import NameCard from '../components/NameCard.astro';
+import '../global.css';
+import ProfilePicture from '../assets/images/profile.png';
 ---
 
 <html lang="en">
@@ -8,9 +10,77 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Ryan Stainsby - About Me</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<div class="header container">
+			<NameCard name="Ryan Stainsby" subtitle='Front-end engineer' about={['Senior front-end engineer', 'Creative web developer', 'Budding UI designer']} profilePicture={ProfilePicture} />
+		</div>
 	</body>
 </html>
+
+<style>
+	.header {
+		padding-top: 3rem;
+	}
+
+	.container {
+		width: 90%;
+		margin: 0 auto;
+	}
+
+	.header::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: calc(40vw + 1.5rem);
+		width: 100%;
+		background: linear-gradient(180deg, var(--cl-primary) 0%, var(--cl-secondary) 100%);
+		background-size: cover;
+		background-position: center;
+		z-index: -1;
+	}
+
+	@media screen and (min-width: 640px) {
+		.header {
+			position: absolute;
+			top: 30%;
+			padding: 0;
+			width: 100vw;
+		}
+
+		:global(.name-card) {
+			position: absolute;
+			top: -2.5rem;
+			left: 10%;
+			width: 80%;
+			max-width: 75%;
+		}
+
+		.header::before, .header::after {
+			content: '';
+			top: 0;
+			height: 26vw;
+			max-height: 400px;
+			background: linear-gradient(180deg, var(--cl-primary) 0%, var(--cl-secondary) 100%);
+			z-index: -1;
+		}
+
+		.header::before {
+			position: absolute;
+			left: 0;
+			width: 10%;
+		}
+
+		.header::after {
+			position: absolute;
+			right: 0;
+			width: 30%;
+		}
+	}
+
+	@media screen () {
+		
+	}
+</style>

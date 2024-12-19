@@ -1,0 +1,76 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { PUBLIC_GITHUB_URL, PUBLIC_CODEPEN_URL, PUBLIC_LINKEDIN_URL } = import.meta.env;
+
+interface Props {
+  groupClass?: string;
+  linkClass?: string;
+  iconClass?: string;
+}
+
+interface SocialLink {
+  name: string;
+  url: string;
+  icon: string;
+}
+
+const socialLinks: SocialLink[] = [
+  {
+    name: 'Github',
+    url: PUBLIC_GITHUB_URL,
+    icon: 'mdi_github'
+  },
+  {
+    name: 'Codepen',
+    url: PUBLIC_CODEPEN_URL,
+    icon: 'mdi_codepen'
+  },
+  {
+    name: 'LinkedIn',
+    url: PUBLIC_LINKEDIN_URL,
+    icon: 'mdi_linkedin'
+  }
+]
+
+const { groupClass, linkClass, iconClass } = Astro.props;
+---
+
+<ul class:list={["social-links", groupClass]}>
+  {
+    socialLinks.map((link) => (
+      <li>
+        <a class:list={["icon-link", linkClass]} href={link.url}>
+          <Icon name={link.icon} class:list={["icon", iconClass]} />
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style scoped>
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .social-links {
+    display: grid;
+    grid-template-columns: repeat(3, 3rem);
+    gap: 0.5rem;
+  }
+
+  .icon-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .icon {
+    display: block;
+    height: clamp(2.5rem, 1.144vw + 1.634rem, 3rem);
+    width: clamp(2.5rem, 1.144vw + 1.634rem, 3rem);
+    color: var(--cl-secondary);
+  }
+
+</style>

@@ -1,0 +1,125 @@
+---
+import { Image } from 'astro:assets';
+import SocialLinks from './SocialLinks.astro';
+
+interface Props {
+  name: string;
+  subtitle: string;
+  about: string | string[]
+  profilePicture: ImageMetadata;
+}
+
+const { name, subtitle, about, profilePicture } = Astro.props;
+---
+
+<div class="name-card">
+  <Image 
+    id='profile-picture'
+    src={profilePicture} 
+    alt=`A photo of ${name}`
+    loading='eager'
+    widths={[320, 480]}
+    sizes={`(max-width: 639px) 320px, 540px`}>
+  </Image>
+  <div class="name-card__text">
+    <p class="scribble">Hi, I'm</p>
+    <h1 class="title">{ name }</h1>
+    <h2 class="subtitle">{ subtitle }</h2>
+    {
+      Array.isArray(about)
+        ?
+        <ul class="about">
+          { about.map((item, index) => (
+            <li>{ item }</li>
+          )) }
+        </ul>
+        : <p class="about">{ about }</p>
+    }
+    <SocialLinks groupClass="social-links" linkClass="icon-link" iconClass="icon" />
+  </div>
+</div>
+
+<style scoped>
+  .name-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-transform: uppercase;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .name-card__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  #profile-picture {
+    border-radius: 50%;
+    height: calc(80vw - 2rem);
+    width: calc(80vw - 2rem);
+    border: 3px solid var(--cl-secondary);
+    background-color: #191919;
+    margin-bottom: 2rem;
+  }
+
+  .title {
+    font-size: clamp(2rem, 4.589vw + 1.082rem, 5rem);
+    margin: 0;
+  }
+
+  .subtitle { 
+    font-size: clamp(1.2rem, 1.224vw + 0.955rem, 2rem);
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+    color: var(--cl-secondary);
+  }
+
+  .scribble {
+    font-size: clamp(1.1rem, 1.377vw + 0.825rem, 2rem);
+    font-family: 'Burlington Script', cursive;
+  }
+
+  .name-card * {
+    text-align: center;
+  }
+
+  .about {
+    font-weight: 300;
+    font-size: 1rem;
+    text-transform: none;
+    color: var(--cl-secondary);
+    margin-bottom: 3rem;
+  }
+
+  @media screen and (min-width: 640px) {
+    .name-card {
+      width: 100%;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
+
+    .name-card__text {
+      align-items: flex-start;
+      text-align: unset;
+      padding-left: 2rem;
+    }
+
+    #profile-picture {
+      width: calc(40vw - 2rem);
+      height: calc(40vw - 2rem);
+      max-width: 400px;
+      max-height: 400px;
+    }
+
+    .scribble {
+      font-size: 2.4rem;
+    }
+
+    .title {
+      font-size: clamp(2rem, 8vw + -2.5rem, 5rem);
+    }
+  }
+</style>
