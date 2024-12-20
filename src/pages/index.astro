@@ -14,23 +14,27 @@ import ProfilePicture from '../assets/images/profile.png';
 	</head>
 	<body>
 		<div class="header container">
+			<div class="header-background"></div>
 			<NameCard name="Ryan Stainsby" subtitle='Front-end engineer' about={['Senior front-end engineer', 'Creative web developer', 'Budding UI designer']} profilePicture={ProfilePicture} />
+			<div class="header-background"></div>
 		</div>
 	</body>
 </html>
 
 <style>
 	.header {
+		display: grid;
+		grid-template-rows: 1fr 1fr;
+		height: 100vh;
+		max-height: 100vh;
 		padding-top: 3rem;
 	}
 
-	.container {
-		width: 90%;
-		margin: 0 auto;
+	:global(.name-card) {
+		grid-row: 1/1;
 	}
 
-	.header::before {
-		content: '';
+	.header-background{
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -45,42 +49,46 @@ import ProfilePicture from '../assets/images/profile.png';
 	@media screen and (min-width: 640px) {
 		.header {
 			position: absolute;
-			top: 30%;
-			padding: 0;
+			top: 15vh;
 			width: 100vw;
+			grid-template-rows: minmax(30vw, 400px);
+			grid-template-columns: 1fr minmax(360px, 860px) minmax(50px, 200px) 1fr;
+			column-gap: 3.5rem;
+			height: unset;
+			align-items: center;
+			min-width: fit-content;
+			overflow: hidden;;
 		}
 
 		:global(.name-card) {
-			position: absolute;
-			top: -2.5rem;
-			left: 10%;
-			width: 80%;
-			max-width: 75%;
+			grid-row: 1/-1;
+			grid-column: 2/4;
 		}
 
-		.header::before, .header::after {
-			content: '';
-			top: 0;
-			height: 26vw;
-			max-height: 400px;
-			background: linear-gradient(180deg, var(--cl-primary) 0%, var(--cl-secondary) 100%);
-			z-index: -1;
+		.header-background {
+			grid-row: 1 / 2;
+			position: relative;
+			height: 80%;
+			max-height: 360px;
+			min-height: 220px;
 		}
 
-		.header::before {
-			position: absolute;
-			left: 0;
-			width: 10%;
+		.header-background:nth-of-type(1) {
+			grid-column: 1/2;
 		}
 
-		.header::after {
-			position: absolute;
-			right: 0;
-			width: 30%;
+		.header-background:nth-of-type(3) {
+			grid-column: 3/-1;
 		}
 	}
 
-	@media screen () {
-		
+	@media screen and (min-width: 640px) and (max-width: 1240px) {
+		.header {
+			grid-template-columns: 1fr minmax(360px, 600px) minmax(50px, 200px) 1fr;
+		}
+
+		.header-background {
+			max-height: 260px;
+		}
 	}
 </style>

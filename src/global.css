@@ -5,6 +5,12 @@
 }
 
 @font-face {
+  font-family: 'Burlington Script';
+  src: url('/fonts/burlington-script/badscript-regular-webfont.woff2') format('woff2'),
+    url('/fonts/burlington-script/badscript-regular-webfont.woff') format('woff');
+}
+
+@font-face {
   font-family: 'Montserrat';
   src: url('/fonts/montserrat/montserrat-bold-webfont.woff2') format('woff2'),
        url('/fonts/montserrat/montserrat-bold-webfont.woff') format('woff');
@@ -15,9 +21,9 @@
 
 @font-face {
   font-family: 'Montserrat';
-  src: url('/fonts/montserrat/montserrat-medium-webfont.woff2') format('woff2'),
-       url('/fonts/montserrat/montserrat-medium-webfont.woff') format('woff');
-  font-weight: 500;
+  src: url('/fonts/montserrat/montserrat-light-webfont.woff2') format('woff2'),
+       url('/fonts/montserrat/montserrat-light-webfont.woff') format('woff');
+  font-weight: 300;
   font-style: normal;
   font-display: 'swap';
 }
@@ -26,7 +32,7 @@
   font-family: 'Montserrat';
   src: url('/fonts/montserrat/montserrat-regular-webfont.woff2') format('woff2'),
        url('/fonts/montserrat/montserrat-regular-webfont.woff') format('woff');
-  font-weight: 300;
+  font-weight: 400;
   font-style: normal;
   font-display: 'swap';
 }
@@ -34,7 +40,7 @@
 :root {
   --cl-pure-gold: hsl(46, 65%, 78%);
   --cl-white-gold: hsl(55, 53%, 83%);
-  --cl-ivory: hsl(42, 48%, 89%);
+  --cl-ivory: hsl(43, 43%, 90%);
   --cl-dusky-grey: hsl(0, 0%, 14%);
   --cl-white: hsl(0, 0%, 100%);
 
@@ -62,6 +68,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 2.986rem;
+  color: var(--cl-primary);
 }
 
 h2 {

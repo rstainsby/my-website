@@ -18,7 +18,7 @@ const { name, subtitle, about, profilePicture } = Astro.props;
     src={profilePicture} 
     alt=`A photo of ${name}`
     loading='eager'
-    widths={[320, 480]}
+    widths={[320, 540]}
     sizes={`(max-width: 639px) 320px, 540px`}>
   </Image>
   <div class="name-card__text">
@@ -78,12 +78,8 @@ const { name, subtitle, about, profilePicture } = Astro.props;
   }
 
   .scribble {
-    font-size: clamp(1.1rem, 1.377vw + 0.825rem, 2rem);
+    font-size: 1.2rem;
     font-family: 'Burlington Script', cursive;
-  }
-
-  .name-card * {
-    text-align: center;
   }
 
   .about {
@@ -96,30 +92,39 @@ const { name, subtitle, about, profilePicture } = Astro.props;
 
   @media screen and (min-width: 640px) {
     .name-card {
-      width: 100%;
-      flex-direction: row-reverse;
-      justify-content: space-between;
-    }
-
-    .name-card__text {
-      align-items: flex-start;
-      text-align: unset;
-      padding-left: 2rem;
+      display: grid;
+      grid-template-rows: 1fr;
+      grid-template-columns: 3fr 1fr;
+      column-gap: 1rem;
+      align-items: center;
+      text-align: start;
     }
 
     #profile-picture {
-      width: calc(40vw - 2rem);
-      height: calc(40vw - 2rem);
-      max-width: 400px;
+      grid-row: 1 / 2;
+      grid-column: 2 / 3;
+      align-self: centerx;
+      justify-self: end;
+      width: calc(30vw - 2rem);
+      height: calc(30vw - 2rem);
+      min-width: 280px;
+      min-height: 280px;
       max-height: 400px;
+      max-width: 400px;
+      margin: 0;
     }
 
-    .scribble {
-      font-size: 2.4rem;
+    .name-card__text {
+      height: fit-content;
+      grid-column: 1/2;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: start;
     }
 
     .title {
-      font-size: clamp(2rem, 8vw + -2.5rem, 5rem);
+      font-size: clamp(2rem, 8vw + -2.5rem, 4rem);
+      margin: 0;
     }
   }
 </style>
