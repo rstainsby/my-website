@@ -58,7 +58,7 @@ const { groupClass, linkClass, iconClass } = Astro.props;
   .social-links {
     display: grid;
     grid-template-columns: repeat(3, 3rem);
-    gap: 0.5rem;
+    gap: 1rem;
   }
 
   .icon-link {
@@ -68,9 +68,29 @@ const { groupClass, linkClass, iconClass } = Astro.props;
 
   .icon {
     display: block;
-    height: clamp(2.5rem, 1.144vw + 1.634rem, 3rem);
-    width: clamp(2.5rem, 1.144vw + 1.634rem, 3rem);
+    height: clamp(2.5rem, 2.5vw + 2rem, 3rem);
+    width: clamp(2.5rem, 2.5vw + 2rem, 3rem);
     color: var(--cl-secondary);
+    transition: 0.3s ease;
   }
 
+  .icon:hover, .icon:focus {
+    color: var(--cl-primary);
+    transform: scale(1.1);
+  }
+
+  .icon:active {
+    transform: scale(0.9);
+  }
+
+  .icon-link:focus-visible{
+    color: var(--cl-primary);
+    outline-color: var(--cl-primary);
+    outline-width: 2px;
+  }
+
+  .icon-link:focus > .icon {
+    color: var(--cl-primary);
+  }
+  
 </style>
