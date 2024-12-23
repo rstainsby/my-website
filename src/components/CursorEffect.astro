@@ -1,6 +1,6 @@
 ---
   interface Props {
-    bindToElementId: string;
+    bindToElementId?: string;
   }
 
   const { bindToElementId } = Astro.props;
@@ -13,12 +13,19 @@
     }
     
     connectedCallback() {
-      const bindToElement: HTMLElement | null = this.dataset.bindtoelementid ? document.getElementById(this.dataset.bindtoelementid) : null;
+      let bindToElement: HTMLElement | null;
+
+      if (this.dataset.bindtoelementid) {
+        bindToElement = document.getElementById(this.dataset.bindtoelementid);
+      } else {
+        bindToElement = document.body;
+      }
+
       const cursorEffect: HTMLElement | null = document.getElementById('cursor-effect');
       
       const moveCursorEffect = (event: MouseEvent) => setTimeout(() => {  
-        const lightCenterX = event.x - 150;
-        const lightCenterY = event.y - 150;
+        const lightCenterX = event.x - 250;
+        const lightCenterY = event.y - 250;
         
         if (cursorEffect) {
           cursorEffect.style.transform = `translate(${lightCenterX}px, ${lightCenterY}px`;
@@ -30,13 +37,15 @@
       } else if (this.dataset.bindtoelementid) {
         console.error(`CursorEffect: Element with id ${this.dataset.bindtoelementid} not found`);
       } else {
-        console.error('CursorEffect: bindToElementId is required');
+        console.error('CursorEffect: Unable to bind to body');
       }
     }
   }
 
   customElements.define('cursor-effect', CursorEffect);
 </script>
+
+
 
 <cursor-effect data-bindtoelementid={bindToElementId}>
   <span id="cursor-effect" class="cursor-effect"></span>
@@ -45,8 +54,8 @@
 <style scoped>
   .cursor-effect {
   position: fixed;
-  height: 300px;
-  width: 300px;
+  height: 500px;
+  width: 500px;
   top: 0;
   left: 0;
   border-radius: 50%;

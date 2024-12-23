@@ -2,6 +2,7 @@
 import NameCard from '../components/NameCard.astro';
 import '../global.css';
 import ProfilePicture from '../assets/images/profile.png';
+import CursorEffect from '../components/CursorEffect.astro';
 ---
 
 <html lang="en">
@@ -13,6 +14,7 @@ import ProfilePicture from '../assets/images/profile.png';
 		<title>Ryan Stainsby - About Me</title>
 	</head>
 	<body>
+		<CursorEffect />
 		<div class="header container">
 			<div class="header-background"></div>
 			<NameCard name="Ryan Stainsby" subtitle='Front-end engineer' about={['Senior front-end engineer', 'Creative web developer', 'Budding UI designer']} profilePicture={ProfilePicture} />
