@@ -1,0 +1,28 @@
+---
+import CallToAction from "./CallToAction.astro";
+---
+
+<nav class="navbar">
+  <a id="home-icon" href="/">
+    
+  </a>
+
+  <CallToAction link="/" icon="mdi_email">
+    Hire Me
+  </CallToAction>
+</nav>
+
+<style scoped>
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    color: var(--cl-primary);
+  }
+
+  #home-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
