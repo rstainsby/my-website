@@ -3,6 +3,7 @@ import NameCard from '../components/NameCard.astro';
 import '../global.css';
 import ProfilePicture from '../assets/images/profile.png';
 import CursorEffect from '../components/CursorEffect.astro';
+import Button from '../components/Button.astro';
 ---
 
 <html lang="en">
@@ -15,20 +16,60 @@ import CursorEffect from '../components/CursorEffect.astro';
 	</head>
 	<body>
 		<CursorEffect />
-		<div class="header container">
+		<div class="header">
 			<div class="header-background"></div>
 			<NameCard name="Ryan Stainsby" subtitle='Senior Front-end engineer' about={['I build high-quality, responsive user interfaces that customers love.']} profilePicture={ProfilePicture} />
+		</div>
+		<div class="container">
+			<div class="text-and-cta">
+				<h2>Let's Work Together.</h2>
+				<p>
+					Whether it's a <b>single page website, UI library or an interactive 3D experience with WebGL</b>  - I help businesses build websites that delight their users and leave them remembering you for all the right reasons.
+				</p>
+				<Button icon="arrow-right">Get In Touch</Button>
+			</div>
 		</div>
 	</body>
 </html>
 
 <style>
+	.container {
+		width: 90%;
+		max-width: 1120px;
+		margin: 0 auto;
+	}
+
+	.text-and-cta {
+		max-width: 65ch;
+		margin-bottom: 20rem;
+	}
+
+	.text-and-cta h2 {
+		color: var(--cl-primary);
+		margin-bottom: 2rem;
+	}
+
+	.text-and-cta h2::after {
+		content: '';
+		display: block;
+		width: 50%;
+		height: 3px;
+		background: var(--cl-primary);
+		margin-top: 0.5rem;
+	}
+
+	.text-and-cta p {
+		margin-bottom: 3rem;
+		font-size: 1.1rem;
+	}
+
 	.header {
 		display: grid;
 		grid-template-rows: 1fr 1fr;
 		height: 100vh;
 		max-height: 100vh;
 		padding-top: 3rem;
+		margin-bottom: 40vh;
 	}
 
 	:global(.name-card) {
@@ -50,13 +91,11 @@ import CursorEffect from '../components/CursorEffect.astro';
 
 	@media screen and (min-width: 640px) {
 		.header {
-			position: absolute;
-			top: 15vh;
 			width: 100vw;
 			grid-template-rows: 1fr;
 			grid-template-columns: 1fr minmax(360px, 860px) minmax(50px, 200px) 1fr;
 			column-gap: 3.5rem;
-			height: unset;
+			height: 80vh;
 			align-items: center;
 			min-width: fit-content;
 			overflow: hidden;

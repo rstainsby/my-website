@@ -1,0 +1,80 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { icon } = Astro.props;
+---
+
+{
+  <button>
+    <slot />
+    {
+      icon && (
+        <Icon name={icon} class="icon" />
+      )
+    }
+  </button>
+}
+
+<style scoped>
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.7rem;
+    border: none;
+    border-radius: 100rem;
+    background-color: var(--cl-bg);
+    color: var(--cl-white);
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .icon {
+    fill: white;
+    scale: 0.9;
+    transition: 0.1s linear;
+    
+  }
+
+  button:hover > .icon {
+    transform: translateX(0.4rem);
+  }
+
+  button::before, 
+  button::after {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: -1;
+    inset: -2px;
+    background: conic-gradient(
+      from var(--gradient-angle), 
+      #4C4C4C 0%,
+      var(--cl-secondary) 20%,
+      var(--cl-primary) 30%, 
+      var(--cl-secondary) 35%,
+      #4C4C4C 45%);
+    border-radius: inherit;
+    animation: rotate 8s linear infinite;
+  }
+
+  button::after {
+    inset: -8px;
+    opacity: 0.2;
+    filter: blur(4px);
+    background: conic-gradient(
+      from var(--gradient-angle), 
+      transparent 0%,
+      var(--cl-secondary) 20%,
+      var(--cl-primary) 30%, 
+      var(--cl-secondary) 35%,
+      transparent 45%);
+  }
+
+  button:hover::before {
+    background: var(--cl-primary);
+  }
+</style>
