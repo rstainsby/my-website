@@ -61,7 +61,7 @@ body {
   background-color: var(--cl-bg);
   color: var(--cl-white);
 
-  background-image: radial-gradient(hsl(0, 0%, 18%, 1) 1px, transparent 0);
+  background-image: radial-gradient(hsl(0, 0%, 18%, 1) 2px, transparent 0);
   background-size: 40px 40px;
   background-position: -19px -19px;
 }
