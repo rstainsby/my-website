@@ -99,7 +99,7 @@ a,
 p {
   margin: 0;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.7;
 }
 
 label, 
@@ -127,54 +127,4 @@ button {
   cursor: pointer;
   background-color: var(--cl-bg);
   color: inherit;
-  margin: 0;
-  border-width: 1px;
-  border-radius: 100px;
-  border-style: solid;
-  border-color: transparent;
-  padding: 0.5rem 1.5rem;
-}
-
-button::before, 
-button::after {
-  content: '';
-  display: block;
-  position: absolute;
-  z-index: -1;
-  inset: -3px;
-  background: conic-gradient(
-    from var(--gradient-angle), 
-    #4C4C4C 0%,
-    var(--cl-secondary) 20%,
-    var(--cl-primary) 30%, 
-    var(--cl-secondary) 35%,
-    #4C4C4C 45%);
-  border-radius: inherit;
-  animation: rotate 8s linear infinite;
-}
-
-button::after {
-  inset: -8px;
-  opacity: 0.2;
-  filter: blur(4px);
-  background: conic-gradient(
-    from var(--gradient-angle), 
-    transparent 0%,
-    var(--cl-secondary) 20%,
-    var(--cl-primary) 30%, 
-    var(--cl-secondary) 35%,
-    transparent 45%);
-}
-
-button:hover::before {
-  background: var(--cl-primary);
-}
-
-@keyframes rotate {
-  0% {
-    --gradient-angle: 0deg;
-  }
-  100% {
-    --gradient-angle: 360deg;
-  }
 }

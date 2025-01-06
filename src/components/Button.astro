@@ -59,6 +59,7 @@ const { icon } = Astro.props;
       #4C4C4C 45%);
     border-radius: inherit;
     animation: rotate 8s linear infinite;
+    transition: all 0.3s;
   }
 
   button::after {
@@ -74,7 +75,16 @@ const { icon } = Astro.props;
       transparent 45%);
   }
 
-  button:hover::before {
+  button:hover::before, button:hover::after {
     background: var(--cl-primary);
+  }
+
+  @keyframes rotate {
+    0% {
+      --gradient-angle: 0deg;
+    }
+    100% {
+      --gradient-angle: 360deg;
+    }
   }
 </style>
