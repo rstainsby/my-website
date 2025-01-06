@@ -17,8 +17,7 @@ import CursorEffect from '../components/CursorEffect.astro';
 		<CursorEffect />
 		<div class="header container">
 			<div class="header-background"></div>
-			<NameCard name="Ryan Stainsby" subtitle='Front-end engineer' about={['Senior front-end engineer', 'Creative web developer', 'Budding UI designer']} profilePicture={ProfilePicture} />
-			<div class="header-background"></div>
+			<NameCard name="Ryan Stainsby" subtitle='Senior Front-end engineer' about={['I build high-quality, performant user interfaces that customers love']} profilePicture={ProfilePicture} />
 		</div>
 	</body>
 </html>
@@ -41,6 +40,7 @@ import CursorEffect from '../components/CursorEffect.astro';
 		top: 0;
 		left: 0;
 		height: calc(40vw + 1.5rem);
+		max-height: 220px;
 		width: 100%;
 		background: linear-gradient(180deg, var(--cl-primary) 0%, var(--cl-secondary) 100%);
 		background-size: cover;
@@ -53,7 +53,7 @@ import CursorEffect from '../components/CursorEffect.astro';
 			position: absolute;
 			top: 15vh;
 			width: 100vw;
-			grid-template-rows: minmax(30vw, 400px);
+			grid-template-rows: 1fr;
 			grid-template-columns: 1fr minmax(360px, 860px) minmax(50px, 200px) 1fr;
 			column-gap: 3.5rem;
 			height: unset;
@@ -68,11 +68,7 @@ import CursorEffect from '../components/CursorEffect.astro';
 		}
 
 		.header-background {
-			grid-row: 1 / 2;
-			position: relative;
-			height: 80%;
-			max-height: 360px;
-			min-height: 220px;
+			display: none;
 		}
 
 		.header-background:nth-of-type(1) {

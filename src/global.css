@@ -41,7 +41,7 @@
   --cl-pure-gold: hsl(46, 65%, 78%);
   --cl-white-gold: hsl(55, 53%, 83%);
   --cl-ivory: hsl(43, 43%, 90%);
-  --cl-dusky-grey: #161616;
+  --cl-dusky-grey: #000516;
   --cl-white: hsl(0, 0%, 100%);
 
   --cl-primary: var(--cl-pure-gold);
