@@ -1,9 +1,3 @@
-@property --gradient-angle {
-  syntax: "<angle>";
-  initial-value: 90deg;
-  inherits: false;
-}
-
 @font-face {
   font-family: 'Burlington Script';
   src: url('/fonts/burlington-script/badscript-regular-webfont.woff2') format('woff2'),
@@ -61,7 +55,7 @@ body {
   background-color: var(--cl-bg);
   color: var(--cl-white);
 
-  background-image: radial-gradient(hsl(0, 0%, 18%, 1) 2px, transparent 0);
+  background-image: radial-gradient(hsl(0, 0%, 18%, 0.5) 2px, transparent 0);
   background-size: 40px 40px;
   background-position: -19px -19px;
 }
