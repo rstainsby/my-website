@@ -4,6 +4,7 @@ import '../global.css';
 import ProfilePicture from '../assets/images/profile.png';
 import CursorEffect from '../components/CursorEffect.astro';
 import Button from '../components/Button.astro';
+import ScrollIndicator from '../components/ScrollIndicator.astro';
 ---
 
 <html lang="en">
@@ -16,21 +17,57 @@ import Button from '../components/Button.astro';
 	</head>
 	<body>
 		<CursorEffect />
-		<div class="header">
+		<div class="header container">
 			<div class="header-background"></div>
 			<NameCard name="Ryan Stainsby" subtitle='Senior Front-end engineer' about={['I build high-quality, responsive user interfaces that customers love.']} profilePicture={ProfilePicture} />
+			<ScrollIndicator />
 		</div>
 		<div class="container">
 			<div class="text-and-cta">
 				<h2>Let's Work Together.</h2>
+				<span class="underline"></span>
 				<p>
 					Whether it's a <b>single page website, UI library or an interactive 3D experience with WebGL</b>  - I help businesses build websites that delight their users and leave them remembering you for all the right reasons.
 				</p>
-				<Button icon="arrow-right">Get In Touch</Button>
+				<div class="button-wrapper">
+					<Button icon="arrow-right">Get In Touch</Button>
+				</div>				
 			</div>
 		</div>
 	</body>
 </html>
+
+<script>
+	const oneWayInViewObserver = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add('in-view');
+			}
+		});
+	});
+
+	document.querySelectorAll('.text-and-cta').forEach((element) => {
+		oneWayInViewObserver.observe(element);
+	});
+
+	const twoWayOutOfViewObserver = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (!entry.isIntersecting) {
+				entry.target.classList.add('out-of-view');
+			} else {
+				entry.target.classList.remove('out-of-view');
+			}
+		});
+	});
+
+	const nameCard = document.querySelector('.name-card')
+
+	if (!nameCard) {
+		throw new Error('Name card not found');
+	}
+
+	twoWayOutOfViewObserver.observe(nameCard);
+</script>
 
 <style>
 	.container {
@@ -40,30 +77,63 @@ import Button from '../components/Button.astro';
 	}
 
 	.text-and-cta {
-		max-width: 65ch;
+		max-width: 55ch;
 		margin-bottom: 20rem;
 	}
 
 	.text-and-cta h2 {
 		color: var(--cl-primary);
-		margin-bottom: 2rem;
+		margin-bottom: 1.5rem;
+		transform: translateX(-100%);
+		opacity: 0;
 	}
 
-	.text-and-cta h2::after {
+	.no-js .text-and-cta h2 {
+		transform: none;
+		opacity: 1;
+	}
+
+ 	.text-and-cta.in-view h2 {
+		animation: slide-in 1s ease-in-out 2s forwards;
+	}
+
+	.text-and-cta .underline {
 		content: '';
 		display: block;
 		width: 50%;
 		height: 3px;
 		background: var(--cl-primary);
-		margin-top: 0.5rem;
+		margin-bottom: 3rem;
+		width: 0;
+		opacity: 1;
+	}
+
+	.no-js .text-and-cta .underline {
+		width: 50%;
+	}
+
+	.text-and-cta.in-view .underline {
+		animation: draw-underline 1s ease-in-out 1s forwards;
 	}
 
 	.text-and-cta p {
 		margin-bottom: 3rem;
 		font-size: 1.1rem;
+		opacity: 0;
+		transition: opacity 0.5s ease-in-out 2.5s;
 	}
 
+	.text-and-cta .button-wrapper {
+		opacity: 0;
+		transition: opacity 0.5s ease-in-out 2.5s;
+	}
+
+	.text-and-cta.in-view p, .no-js .text-and-cta p, .text-and-cta.in-view .button-wrapper, .no-js .text-and-cta .button-wrapper {
+		opacity: 1;
+	}
+ 
 	.header {
+		position: relative;
 		display: grid;
 		grid-template-rows: 1fr 1fr;
 		height: 100vh;
@@ -74,6 +144,14 @@ import Button from '../components/Button.astro';
 
 	:global(.name-card) {
 		grid-row: 1/1;
+	}
+
+	:global(.scroll-indicator) {
+		transition: opacity 0.5s;
+	}
+
+	:global(.name-card.out-of-view) + :global(.scroll-indicator) {
+		opacity: 0;
 	}
 
 	.header-background{
@@ -91,19 +169,20 @@ import Button from '../components/Button.astro';
 
 	@media screen and (min-width: 640px) {
 		.header {
-			width: 100vw;
-			grid-template-rows: 1fr;
-			grid-template-columns: 1fr minmax(360px, 860px) minmax(50px, 200px) 1fr;
+			grid-template-rows: 1fr 10px;
+			grid-template-columns: minmax(360px, 860px) minmax(50px, 200px);
 			column-gap: 3.5rem;
 			height: 80vh;
 			align-items: center;
 			min-width: fit-content;
-			overflow: hidden;
+			overflow-x: visible;
+			overflow-y: auto;
+			overflow: unset;
 		}
 
 		:global(.name-card) {
-			grid-row: 1/-1;
-			grid-column: 2/4;
+			grid-row: 1/2;
+			grid-column: 1/-1;
 		}
 
 		.header-background {
@@ -115,7 +194,7 @@ import Button from '../components/Button.astro';
 		}
 
 		.header-background:nth-of-type(3) {
-			grid-column: 3/-1;
+			grid-column: 2/-1;
 		}
 	}
 
@@ -126,6 +205,26 @@ import Button from '../components/Button.astro';
 
 		.header-background {
 			max-height: 260px;
+		}
+	}
+
+	@keyframes slide-in {
+		0% {
+			transform: translateX(-100%);
+			opacity: 0;
+		}
+		100% {
+			transform: translateX(0);
+			opacity: 1;
+		}		
+	}
+
+	@keyframes draw-underline {
+		0% {
+			width: 0;
+		}
+		100% {
+			width: 50%;
 		}
 	}
 </style>
