@@ -128,14 +128,18 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 		transition: opacity 0.5s ease-in-out 2.5s;
 	}
 
-	.text-and-cta.in-view p, .no-js .text-and-cta p, .text-and-cta.in-view .button-wrapper, .no-js .text-and-cta .button-wrapper {
+	.text-and-cta.in-view p,
+	.text-and-cta.in-view .button-wrapper,  
+	.no-js .text-and-cta p, 
+	.no-js .text-and-cta .button-wrapper {
 		opacity: 1;
 	}
  
 	.header {
 		position: relative;
 		display: grid;
-		grid-template-rows: 1fr 1fr;
+		grid-template-rows: 1fr 1fr 10px;
+		row-gap: 6rem;
 		height: 100vh;
 		max-height: 100vh;
 		padding-top: 3rem;
@@ -147,6 +151,8 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 	}
 
 	:global(.scroll-indicator) {
+		grid-column: 1/-1;
+		justify-self: center;
 		transition: opacity 0.5s;
 	}
 
@@ -172,6 +178,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 			grid-template-rows: 1fr 10px;
 			grid-template-columns: minmax(360px, 860px) minmax(50px, 200px);
 			column-gap: 3.5rem;
+			row-gap: unset;
 			height: 80vh;
 			align-items: center;
 			min-width: fit-content;
@@ -183,6 +190,10 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 		:global(.name-card) {
 			grid-row: 1/2;
 			grid-column: 1/-1;
+		}
+
+		:global(.scroll-indicator) {
+			justify-self: unset;
 		}
 
 		.header-background {
