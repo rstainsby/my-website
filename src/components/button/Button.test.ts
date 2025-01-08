@@ -1,7 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { test, expect, describe } from 'vitest';
 import Button from './Button.astro';
-import RightArrowSvg from '../../assets/icons/arrow-right.svg';
 
 describe('Button', () => {
   test('should render a button with provided slot content', async () => {
