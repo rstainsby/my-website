@@ -38,35 +38,47 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 </html>
 
 <script>
-	const oneWayInViewObserver = new IntersectionObserver((entries) => {
+	const oneWayLoadedObserver = new IntersectionObserver((entries) => {
 		entries.forEach((entry) => {
 			if (entry.isIntersecting) {
-				entry.target.classList.add('in-view');
+				entry.target.classList.add('loaded');
 			}
 		});
 	});
 
 	document.querySelectorAll('.text-and-cta').forEach((element) => {
-		oneWayInViewObserver.observe(element);
+		oneWayLoadedObserver.observe(element);
 	});
 
-	const twoWayOutOfViewObserver = new IntersectionObserver((entries) => {
-		entries.forEach((entry) => {
-			if (!entry.isIntersecting) {
-				entry.target.classList.add('out-of-view');
-			} else {
-				entry.target.classList.remove('out-of-view');
-			}
-		});
-	});
+	const scrollIndicator = document.querySelector('.scroll-indicator') as HTMLElement;
 
-	const nameCard = document.querySelector('.name-card')
-
-	if (!nameCard) {
-		throw new Error('Name card not found');
+	if (!scrollIndicator) {
+		throw new Error('Scroll indicator not found');
 	}
 
-	twoWayOutOfViewObserver.observe(nameCard);
+	const hideScrollObserver = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				scrollIndicator.style.opacity = '0';
+			} else {
+				scrollIndicator.style.opacity = '1';
+			}
+		});
+	}, { threshold: 0.9 });
+
+	const textSections = document.querySelectorAll('.text-and-cta');
+
+	if (!textSections || textSections.length === 0) {
+		throw new Error('Text sections not found');
+	}
+
+	const firstTextSection = textSections[0];
+
+	if (!firstTextSection) {
+		throw new Error('First text section not found');
+	}
+
+	hideScrollObserver.observe(firstTextSection);
 </script>
 
 <style>
@@ -93,7 +105,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 		opacity: 1;
 	}
 
- 	.text-and-cta.in-view h2 {
+ 	.text-and-cta.loaded h2 {
 		animation: slide-in 1s ease-in-out 2s forwards;
 	}
 
@@ -112,7 +124,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 		width: 50%;
 	}
 
-	.text-and-cta.in-view .underline {
+	.text-and-cta.loaded .underline {
 		animation: draw-underline 1s ease-in-out 1s forwards;
 	}
 
@@ -128,8 +140,8 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 		transition: opacity 0.5s ease-in-out 2.5s;
 	}
 
-	.text-and-cta.in-view p,
-	.text-and-cta.in-view .button-wrapper,  
+	.text-and-cta.loaded p,
+	.text-and-cta.loaded .button-wrapper,  
 	.no-js .text-and-cta p, 
 	.no-js .text-and-cta .button-wrapper {
 		opacity: 1;
@@ -153,11 +165,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 	:global(.scroll-indicator) {
 		grid-column: 1/-1;
 		justify-self: center;
-		transition: opacity 0.5s;
-	}
-
-	:global(.name-card.out-of-view) + :global(.scroll-indicator) {
-		opacity: 0;
+		transition: opacity 0.5s ease-out;
 	}
 
 	.header-background{
