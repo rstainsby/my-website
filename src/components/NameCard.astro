@@ -60,6 +60,8 @@ const { name, subtitle, about, profilePicture } = Astro.props;
     border-radius: 50%;
     height: calc(80vw - 2rem);
     width: calc(80vw - 2rem);
+    max-width: 320px;
+    max-height: 320px;
     border: 3px solid var(--cl-secondary);
     background-color: #191919;
     margin-bottom: 2rem;
@@ -74,7 +76,7 @@ const { name, subtitle, about, profilePicture } = Astro.props;
     font-size: clamp(1.2rem, 1.224vw + 0.955rem, 2rem);
     font-weight: 400;
     margin-bottom: 1.25rem;
-    color: var(--cl-secondary);
+    color: var(--cl-white);
   }
 
   .scribble {
@@ -86,9 +88,8 @@ const { name, subtitle, about, profilePicture } = Astro.props;
     font-weight: 300;
     font-size: 1rem;
     text-transform: none;
-    color: white;
+    color: var(--cl-white);
     margin-bottom: 3rem;
-    text-transform: uppercase;
     width: 70%;
     max-width: 40ch;
   }
