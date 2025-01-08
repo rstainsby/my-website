@@ -100,11 +100,6 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 		opacity: 0;
 	}
 
-	.no-js .text-and-cta h2 {
-		transform: none;
-		opacity: 1;
-	}
-
  	.text-and-cta.loaded h2 {
 		animation: slide-in 1s ease-in-out 2s forwards;
 	}
@@ -118,10 +113,6 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 		margin-bottom: 3rem;
 		width: 0;
 		opacity: 1;
-	}
-
-	.no-js .text-and-cta .underline {
-		width: 50%;
 	}
 
 	.text-and-cta.loaded .underline {
@@ -141,9 +132,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 	}
 
 	.text-and-cta.loaded p,
-	.text-and-cta.loaded .button-wrapper,  
-	.no-js .text-and-cta p, 
-	.no-js .text-and-cta .button-wrapper {
+	.text-and-cta.loaded .button-wrapper {
 		opacity: 1;
 	}
  
@@ -244,6 +233,22 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 		}
 		100% {
 			width: 50%;
+		}
+	}
+
+	@media (scripting: none) {
+		.text-and-cta h2 {
+			transform: none;
+			opacity: 1;
+		}
+
+		.text-and-cta .underline {
+			width: 50%;
+		}
+
+		.text-and-cta p, 
+		.text-and-cta .button-wrapper {
+			opacity: 1;
 		}
 	}
 </style>
