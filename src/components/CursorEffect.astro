@@ -24,8 +24,8 @@
       const cursorEffect: HTMLElement | null = document.getElementById('cursor-effect');
       
       const moveCursorEffect = (event: MouseEvent) => setTimeout(() => {  
-        const lightCenterX = event.x - 250;
-        const lightCenterY = event.y - 250;
+        const lightCenterX = event.x - 350;
+        const lightCenterY = event.y - 350;
         
         if (cursorEffect) {
           cursorEffect.style.transform = `translate(${lightCenterX}px, ${lightCenterY}px`;
@@ -54,13 +54,13 @@
 <style scoped>
   .cursor-effect {
   position: fixed;
-  height: 500px;
-  width: 500px;
+  height: 700px;
+  width: 700px;
   top: 0;
   left: 0;
   border-radius: 50%;
   background: radial-gradient(circle, var(--cl-white-gold) 0%, rgba(115,115,115,0) 100%);
-  opacity: 0.4;
+  opacity: 0.3;
   mix-blend-mode:hard-light;
 
   -webkit-filter: blur(10px);
@@ -69,7 +69,7 @@
   -ms-filter: blur(5px);
   filter: blur(80px);
   
-  z-index: 0;
+  z-index: -1;
 }
 
 .cursor-effect:before {
@@ -79,7 +79,7 @@
   height: inherit;
   background: radial-gradient(transparent, black);
   border-radius: 50%;
-  z-index: 2;
+  z-index: -1;
   opacity: 0.4;
 }
 </style>
