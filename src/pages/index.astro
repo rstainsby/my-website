@@ -5,6 +5,7 @@ import ProfilePicture from '../assets/images/profile.png';
 import CursorEffect from '../components/CursorEffect.astro';
 import Button from '../components/button/Button.astro';
 import ScrollIndicator from '../components/ScrollIndicator.astro';
+import TopNavigation from '../components/TopNavigation.astro';
 ---
 
 <html lang="en">
@@ -17,6 +18,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 	</head>
 	<body>
 		<CursorEffect />
+		<TopNavigation />
 		<div class="header container">
 			<div class="header-background"></div>
 			<NameCard name="Ryan Stainsby" subtitle='Senior Front-end engineer' about={['I build high-quality, responsive user interfaces that customers love.']} profilePicture={ProfilePicture} />
