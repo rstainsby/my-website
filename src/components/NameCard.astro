@@ -13,14 +13,19 @@ const { name, subtitle, about, profilePicture } = Astro.props;
 ---
 
 <div class="name-card">
-  <Image 
-    id='profile-picture'
-    src={profilePicture} 
-    alt=`A photo of ${name}`
-    loading='eager'
-    widths={[320, 800]}
-    sizes={`(max-width: 639px) 320px, 800px`}>
-  </Image>
+  <div class="image-container">
+    <span class="image-background"></span>
+    <span class="image-background"></span>
+    <Image 
+      id='profile-picture'
+      src={profilePicture} 
+      alt=`A photo of ${name}`
+      loading='eager'
+      widths={[320, 800]}
+      sizes={`(max-width: 639px) 320px, 800px`}>
+    </Image>
+  </div>
+
   <div class="name-card__text">
 
     <h1 class="title">{ name }</h1>
@@ -62,9 +67,11 @@ const { name, subtitle, about, profilePicture } = Astro.props;
     width: calc(80vw - 2rem);
     max-width: 320px;
     max-height: 320px;
-    border: 3px solid var(--cl-secondary);
-    background-color: #191919;
     margin-bottom: 2rem;
+    filter: grayscale(90%) sepia(40%);
+    aspect-ratio: 1/1;
+    background-color: var(--cl-bg);
+    border: 3px solid var(--cl-secondary);
   }
 
   .title {
@@ -112,6 +119,61 @@ const { name, subtitle, about, profilePicture } = Astro.props;
       height: calc(35vw - 2rem);
       width: calc(35vw - 2rem);
       margin: 0;
+      border: unset;
+      background: unset;
+    }
+
+    .image-container {
+      position: relative;
+      transform-origin: center;
+      transform: scale(1.2);
+      aspect-ratio: 1/1;
+    }
+
+    .image-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(var(--cl-primary) 56%, transparent 57%);
+      aspect-ratio: 1/1;
+      animation: spin-ball 8s linear infinite;
+    }
+
+    .image-background::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 4%;
+      left: 4%;
+      right: 4%;
+      bottom: 4%;
+      border-radius: 50%;
+      border: var(--cl-secondary) 4px solid;
+      background: transparent;
+      z-index: -1;
+      aspect-ratio: 1/1;
+    }
+
+
+    .image-background::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: calc(50% - 10px);
+      left: calc(96% - 12px);
+      border-radius: 50%;
+      height: 20px;
+      width: 20px;
+      background-color: var(--cl-secondary);
+      z-index: -1;
+      aspect-ratio: 1/1;
+    }
+
+    .image-background:nth-child(2)::after {
+      top: calc(50% - 30px);
+      left: calc(4% - 8px);
     }
 
     .name-card__text {
@@ -154,6 +216,15 @@ const { name, subtitle, about, profilePicture } = Astro.props;
     #profile-picture {
       max-height: 440px;
       max-width: 440px;
+    }
+  }
+
+  @keyframes spin-ball {
+    0% {
+      rotate: 0deg;
+    }
+    100% {
+      rotate: 360deg;
     }
   }
 </style>
