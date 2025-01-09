@@ -86,35 +86,31 @@ const { name, subtitle, about, profilePicture } = Astro.props;
 
   .about {
     font-weight: 300;
-    font-size: 1rem;
+    font-size: 1.1rem;
     text-transform: none;
     color: var(--cl-white);
     margin-bottom: 3rem;
     width: 70%;
     max-width: 40ch;
+    line-height: 170%;
   }
 
-  @media screen and (min-width: 640px) {
+  @media screen and (min-width: 800px) {
     .name-card {
-      display: grid;
-      grid-template-rows: 1fr;
-      grid-template-columns: 3fr 1fr;
-      column-gap: 1rem;
+      display: flex;
+      flex-direction: row-reverse;
       align-items: center;
       text-align: start;
+      gap: 1rem;
     }
 
     #profile-picture {
-      grid-row: 1 / 2;
-      grid-column: 2 / 3;
-      align-self: centerx;
-      justify-self: end;
-      width: calc(30vw - 2rem);
-      height: calc(30vw - 2rem);
       min-width: 280px;
       min-height: 280px;
-      max-height: 400px;
-      max-width: 400px;
+      max-height: 360px;
+      max-width: 360px;
+      height: calc(35vw - 2rem);
+      width: calc(35vw - 2rem);
       margin: 0;
     }
 
@@ -126,9 +122,38 @@ const { name, subtitle, about, profilePicture } = Astro.props;
       text-align: start;
     }
 
+    .about {
+      font-size: clamp(1rem, 0.7143rem + 0.7143vw, 1.25rem);
+    }
+
     .title {
-      font-size: clamp(2rem, 8vw + -2.5rem, 4rem);
-      margin: 0;
+      font-size: clamp(2.5rem, 0.4355rem + 5.1613vw, 3.5rem);
+    }
+  }
+
+  @media screen and (min-width: 950px) {
+    .name-card {
+      gap: 4rem;
+    }
+
+    #profile-picture {
+      max-height: 400px;
+      max-width: 400px;
+    }
+
+    .title {
+      font-size: 4rem;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .title {
+      font-size: 4.5rem;
+    }
+
+    #profile-picture {
+      max-height: 440px;
+      max-width: 440px;
     }
   }
 </style>
