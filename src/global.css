@@ -1,9 +1,3 @@
-@property --gradient-angle {
-  syntax: "<angle>";
-  initial-value: 90deg;
-  inherits: false;
-}
-
 @font-face {
   font-family: 'Burlington Script';
   src: url('/fonts/burlington-script/badscript-regular-webfont.woff2') format('woff2'),
@@ -41,7 +35,7 @@
   --cl-pure-gold: hsl(46, 65%, 78%);
   --cl-white-gold: hsl(55, 53%, 83%);
   --cl-ivory: hsl(43, 43%, 90%);
-  --cl-dusky-grey: #161616;
+  --cl-dusky-grey: #000516;
   --cl-white: hsl(0, 0%, 100%);
 
   --cl-primary: var(--cl-pure-gold);
@@ -61,7 +55,7 @@ body {
   background-color: var(--cl-bg);
   color: var(--cl-white);
 
-  background-image: radial-gradient(hsl(0, 0%, 18%, 1) 1px, transparent 0);
+  background-image: radial-gradient(hsl(0, 0%, 18%, 0.5) 2px, transparent 0);
   background-size: 40px 40px;
   background-position: -19px -19px;
 }
@@ -99,7 +93,7 @@ a,
 p {
   margin: 0;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.7;
 }
 
 label, 
@@ -127,54 +121,4 @@ button {
   cursor: pointer;
   background-color: var(--cl-bg);
   color: inherit;
-  margin: 0;
-  border-width: 1px;
-  border-radius: 100px;
-  border-style: solid;
-  border-color: transparent;
-  padding: 0.5rem 1.5rem;
-}
-
-button::before, 
-button::after {
-  content: '';
-  display: block;
-  position: absolute;
-  z-index: -1;
-  inset: -3px;
-  background: conic-gradient(
-    from var(--gradient-angle), 
-    #4C4C4C 0%,
-    var(--cl-secondary) 20%,
-    var(--cl-primary) 30%, 
-    var(--cl-secondary) 35%,
-    #4C4C4C 45%);
-  border-radius: inherit;
-  animation: rotate 8s linear infinite;
-}
-
-button::after {
-  inset: -8px;
-  opacity: 0.2;
-  filter: blur(4px);
-  background: conic-gradient(
-    from var(--gradient-angle), 
-    transparent 0%,
-    var(--cl-secondary) 20%,
-    var(--cl-primary) 30%, 
-    var(--cl-secondary) 35%,
-    transparent 45%);
-}
-
-button:hover::before {
-  background: var(--cl-primary);
-}
-
-@keyframes rotate {
-  0% {
-    --gradient-angle: 0deg;
-  }
-  100% {
-    --gradient-angle: 360deg;
-  }
 }

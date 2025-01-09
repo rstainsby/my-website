@@ -18,11 +18,11 @@ const { name, subtitle, about, profilePicture } = Astro.props;
     src={profilePicture} 
     alt=`A photo of ${name}`
     loading='eager'
-    widths={[320, 540]}
-    sizes={`(max-width: 639px) 320px, 540px`}>
+    widths={[320, 800]}
+    sizes={`(max-width: 639px) 320px, 800px`}>
   </Image>
   <div class="name-card__text">
-    <p class="scribble">Hi, I'm</p>
+
     <h1 class="title">{ name }</h1>
     <h2 class="subtitle">{ subtitle }</h2>
     {
@@ -60,13 +60,15 @@ const { name, subtitle, about, profilePicture } = Astro.props;
     border-radius: 50%;
     height: calc(80vw - 2rem);
     width: calc(80vw - 2rem);
+    max-width: 320px;
+    max-height: 320px;
     border: 3px solid var(--cl-secondary);
     background-color: #191919;
     margin-bottom: 2rem;
   }
 
   .title {
-    font-size: clamp(2rem, 4.589vw + 1.082rem, 5rem);
+    font-size: clamp(2rem, 5vw + 1rem, 3rem);
     margin: 0;
   }
 
@@ -74,7 +76,7 @@ const { name, subtitle, about, profilePicture } = Astro.props;
     font-size: clamp(1.2rem, 1.224vw + 0.955rem, 2rem);
     font-weight: 400;
     margin-bottom: 1.25rem;
-    color: var(--cl-secondary);
+    color: var(--cl-white);
   }
 
   .scribble {
@@ -86,8 +88,10 @@ const { name, subtitle, about, profilePicture } = Astro.props;
     font-weight: 300;
     font-size: 1rem;
     text-transform: none;
-    color: var(--cl-secondary);
+    color: var(--cl-white);
     margin-bottom: 3rem;
+    width: 70%;
+    max-width: 40ch;
   }
 
   @media screen and (min-width: 640px) {

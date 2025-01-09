@@ -1,6 +1,6 @@
 ---
   interface Props {
-    bindToElementId: string;
+    bindToElementId?: string;
   }
 
   const { bindToElementId } = Astro.props;
@@ -13,12 +13,19 @@
     }
     
     connectedCallback() {
-      const bindToElement: HTMLElement | null = this.dataset.bindtoelementid ? document.getElementById(this.dataset.bindtoelementid) : null;
+      let bindToElement: HTMLElement | null;
+
+      if (this.dataset.bindtoelementid) {
+        bindToElement = document.getElementById(this.dataset.bindtoelementid);
+      } else {
+        bindToElement = document.body;
+      }
+
       const cursorEffect: HTMLElement | null = document.getElementById('cursor-effect');
       
       const moveCursorEffect = (event: MouseEvent) => setTimeout(() => {  
-        const lightCenterX = event.x - 150;
-        const lightCenterY = event.y - 150;
+        const lightCenterX = event.x - 350;
+        const lightCenterY = event.y - 350;
         
         if (cursorEffect) {
           cursorEffect.style.transform = `translate(${lightCenterX}px, ${lightCenterY}px`;
@@ -30,13 +37,15 @@
       } else if (this.dataset.bindtoelementid) {
         console.error(`CursorEffect: Element with id ${this.dataset.bindtoelementid} not found`);
       } else {
-        console.error('CursorEffect: bindToElementId is required');
+        console.error('CursorEffect: Unable to bind to body');
       }
     }
   }
 
   customElements.define('cursor-effect', CursorEffect);
 </script>
+
+
 
 <cursor-effect data-bindtoelementid={bindToElementId}>
   <span id="cursor-effect" class="cursor-effect"></span>
@@ -45,13 +54,13 @@
 <style scoped>
   .cursor-effect {
   position: fixed;
-  height: 300px;
-  width: 300px;
+  height: 700px;
+  width: 700px;
   top: 0;
   left: 0;
   border-radius: 50%;
   background: radial-gradient(circle, var(--cl-white-gold) 0%, rgba(115,115,115,0) 100%);
-  opacity: 0.1;
+  opacity: 0.3;
   mix-blend-mode:hard-light;
 
   -webkit-filter: blur(10px);
@@ -60,7 +69,7 @@
   -ms-filter: blur(5px);
   filter: blur(80px);
   
-  z-index: 0;
+  z-index: -1;
 }
 
 .cursor-effect:before {
@@ -70,7 +79,7 @@
   height: inherit;
   background: radial-gradient(transparent, black);
   border-radius: 50%;
-  z-index: 2;
-  opacity: 0.1;
+  z-index: -1;
+  opacity: 0.4;
 }
 </style>

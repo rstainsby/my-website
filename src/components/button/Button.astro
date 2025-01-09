@@ -1,0 +1,130 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { icon } = Astro.props;
+---
+
+{
+  <button>
+    <slot />
+    {
+      icon && (
+        <Icon name={icon} class="icon" />
+      )
+    }
+  </button>
+}
+
+<style scoped>
+  @property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 90deg;
+    inherits: false;
+  }
+
+  @property --gradient-fill-1 {
+    syntax: "<color>";
+    initial-value: transparent;
+    inherits: false;
+  }
+
+  @property --gradient-fill-2 {
+    syntax: "<color>";
+    initial-value: #4C4C4C;
+    inherits: false;
+  }
+
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.65rem 2rem;
+    border: none;
+    border-radius: 100rem;
+    background-color: var(--cl-bg);
+    color: var(--cl-white);
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .icon {
+    fill: white;
+    scale: 0.95;
+    transition: 0.1s linear;
+  }
+
+  button:hover > .icon {
+    transform: translateX(0.4rem);
+  }
+
+  button::before, 
+  button::after {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: -1;
+    inset: -2px;
+    background: conic-gradient(
+      from var(--gradient-angle), 
+      var(--gradient-fill-1) 0%,
+      var(--cl-secondary) 20%,
+      var(--cl-primary) 30%, 
+      var(--cl-secondary) 35%,
+      var(--gradient-fill-1) 45%);
+    background-size: 100%;
+    border-radius: inherit;
+    animation: rotate 8s linear infinite;
+    transition: all 0.3s;
+  }
+
+  button::after {
+    inset: -8px;
+    opacity: 0.2;
+    filter: blur(4px);
+    background: conic-gradient(
+      from var(--gradient-angle), 
+      var(--gradient-fill-1) 0%,
+      var(--cl-secondary) 20%,
+      var(--cl-primary) 30%, 
+      var(--cl-secondary) 35%,
+      var(--gradient-fill-1) 45%);
+  }
+
+  button:hover::before, button:hover::after {
+    animation: fill 0.5s linear forwards;
+  }
+
+  button:active::after {
+    filter: blur(8px);
+    opacity: 0.4;
+  }
+
+
+  @keyframes rotate {
+    0% {
+      --gradient-angle: 0deg;
+    }
+    100% {
+      --gradient-angle: 360deg;
+    }
+  }
+
+  @keyframes fill {
+    0% {
+      --gradient-fill-1: transparent;
+      --gradient-fill-2: #4C4C4C;
+    }
+    50% {
+      --gradient-fill-1: var(--cl-secondary);
+      --gradient-fill-2: var(--cl-secondary);;
+    }
+    100% {
+      --gradient-fill-1: var(--cl-primary);
+      --gradient-fill-2: var(--cl-primary);
+    }
+  }
+</style>
