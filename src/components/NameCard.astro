@@ -14,8 +14,11 @@ const { name, subtitle, about, profilePicture } = Astro.props;
 
 <div class="name-card">
   <div class="image-container">
-    <span class="image-background"></span>
-    <span class="image-background"></span>
+    <span class="image-background__outer-circle">
+      <span class="outer-circle__orbit"></span>
+      <span class="outer-circle__orbit"></span>
+    </span>
+    <span class="image-background__inner-circle"></span>
     <Image 
       id='profile-picture'
       src={profilePicture} 
@@ -45,6 +48,12 @@ const { name, subtitle, about, profilePicture } = Astro.props;
 </div>
 
 <style scoped>
+  @property --ring-draw-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+  }
+
   .name-card {
     display: flex;
     flex-direction: column;
@@ -59,6 +68,7 @@ const { name, subtitle, about, profilePicture } = Astro.props;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    animation: fade-in 1s ease-in;
   }
 
   #profile-picture {
@@ -121,6 +131,8 @@ const { name, subtitle, about, profilePicture } = Astro.props;
       margin: 0;
       border: unset;
       background: unset;
+      opacity: 0;
+      animation: fade-in 0.25s 3s ease-in forwards;
     }
 
     .image-container {
@@ -130,7 +142,7 @@ const { name, subtitle, about, profilePicture } = Astro.props;
       aspect-ratio: 1/1;
     }
 
-    .image-background {
+    .image-background__inner-circle {
       position: absolute;
       top: 0;
       left: 0;
@@ -138,11 +150,11 @@ const { name, subtitle, about, profilePicture } = Astro.props;
       bottom: 0;
       background: radial-gradient(var(--cl-primary) 56%, transparent 57%);
       aspect-ratio: 1/1;
-      animation: spin-ball 8s linear infinite;
+      animation: pop-in ease-in-out 1s forwards;
     }
 
-    .image-background::before {
-      content: '';
+    .image-background__outer-circle {
+      --p: 0% /* fallback for no property support */;
       display: block;
       position: absolute;
       top: 4%;
@@ -150,29 +162,44 @@ const { name, subtitle, about, profilePicture } = Astro.props;
       right: 4%;
       bottom: 4%;
       border-radius: 50%;
-      border: var(--cl-secondary) 4px solid;
-      background: transparent;
+      background: conic-gradient(var(--cl-secondary) var(--ring-draw-angle), var(--cl-bg) 0);
       z-index: -1;
       aspect-ratio: 1/1;
+      animation-name: draw-ring, spin-ball;
+      animation-duration: 1s, 8s;
+      animation-timing-function: ease-in-out, linear;
+      animation-delay: 1s, 3.5s;
+      animation-iteration-count: 1, infinite;
+      animation-fill-mode: forwards;
+``
     }
 
-    .image-background::after {
-      content: '';
+    .outer-circle__orbit {
       display: block;
       position: absolute;
       top: calc(50% - 10px);
-      left: calc(96% - 12px);
+      left: calc(100% - 12px);
       border-radius: 50%;
       height: 20px;
       width: 20px;
       background-color: var(--cl-secondary);
-      z-index: -1;
       aspect-ratio: 1/1;
+      transform: scale(0);
+      animation: pop-in 0.1s ease-in-out 2s forwards;
     }
 
-    .image-background:nth-child(2)::after {
-      top: calc(50% - 30px);
-      left: calc(4% - 8px);
+    .outer-circle__orbit:nth-child(2) {
+      top: calc(50% - 10px);
+      left: -8px;
+      animation: pop-in 0.1s ease-in-out 2.5s forwards;
+    }
+
+    .image-background__outer-circle:before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border-radius: inherit;
+      background: var(--cl-bg);
     }
 
     .name-card__text {
@@ -218,12 +245,59 @@ const { name, subtitle, about, profilePicture } = Astro.props;
     }
   }
 
+  @media (prefers-reduced-motion) {
+    .image-background__outer-circle {
+      animation: none;
+      --ring-draw-angle: 360deg;
+    }
+
+    .outer-circle__orbit, .outer-circle__orbit:nth-child(2) {
+      animation: none;
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .image-background__inner-circle {
+      animation: none;
+      transform: scale(1);
+    }
+
+    #profile-picture {
+      animation: none;
+      opacity: 1;
+    }
+  }
+
+  @keyframes draw-ring {
+    to {
+      --ring-draw-angle: 360deg;
+    }
+  }
+
+  @keyframes pop-in {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
   @keyframes spin-ball {
     0% {
       rotate: 0deg;
     }
     100% {
       rotate: 360deg;
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
     }
   }
 </style>
