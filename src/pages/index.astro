@@ -84,6 +84,13 @@ import TopNavigation from '../components/TopNavigation.astro';
 </script>
 
 <style>
+	body {
+		/* 
+		* Required as the hero image animation rotates and just slightly goes outside of page 
+		* causing scroll bar to constantly appear/disapper.
+		*/
+		overflow-x: hidden;
+	}
 	.text-and-cta {
 		max-width: 55ch;
 		margin-bottom: 20rem;
