@@ -43,11 +43,15 @@ import { Icon } from "astro-icon/components";
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1rem 1.5rem;
     color: var(--cl-primary);
     z-index: 99;
     background-color: var(--cl-bg-alpha);
     backdrop-filter: blur(5px);
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
   }
 
   .navbar.invert {
@@ -86,6 +90,8 @@ import { Icon } from "astro-icon/components";
     letter-spacing: 0.2rem;
     transition: 0.2s ease-in-out;
     margin-top: -0.5rem;
+    vertical-align: middle;
+    line-height: 42px;
   }
 
   .navbar__cta:hover {
@@ -99,6 +105,7 @@ import { Icon } from "astro-icon/components";
   }
 
   .icon {
+    display: none;
     margin-left: 0.5rem;
     color: var(--cl-primary);
     stroke: var(--cl-primary);
@@ -109,6 +116,13 @@ import { Icon } from "astro-icon/components";
     .navbar {
       background-color: transparent;
       backdrop-filter: unset;
+      width: 100%;
+      max-width: unset;
+      margin: unset;
+    }
+
+    .icon {
+      display: block;
     }
   }
 

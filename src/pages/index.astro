@@ -84,12 +84,6 @@ import TopNavigation from '../components/TopNavigation.astro';
 </script>
 
 <style>
-	.container {
-		width: 90%;
-		max-width: 1120px;
-		margin: 0 auto;
-	}
-
 	.text-and-cta {
 		max-width: 55ch;
 		margin-bottom: 20rem;
@@ -151,6 +145,7 @@ import TopNavigation from '../components/TopNavigation.astro';
 
 	:global(.name-card) {
 		grid-row: 1/1;
+		padding-top: 2.5rem;
 	}
 
 	:global(.scroll-indicator) {
@@ -163,8 +158,8 @@ import TopNavigation from '../components/TopNavigation.astro';
 		position: absolute;
 		top: 0;
 		left: 0;
-		height: calc(40vw + 1.5rem);
-		max-height: 220px;
+		height: calc(40vw + 4rem);
+		max-height: 270px;
 		width: 100%;
 		background: linear-gradient(180deg, var(--cl-primary) 0%, var(--cl-secondary) 100%);
 		background-size: cover;
@@ -172,14 +167,15 @@ import TopNavigation from '../components/TopNavigation.astro';
 		z-index: -1;
 	}
 
-	@media screen and (min-width: 640px) {
+	@media screen and (min-width: 800px) {
 		.header {
 			grid-template-rows: 1fr 10px;
-			grid-template-columns: minmax(360px, 860px) minmax(50px, 200px);
+			grid-template-columns: 1fr minmax(360px, 600px) minmax(50px, 200px) 1fr;
 			column-gap: 3.5rem;
-			row-gap: unset;
+			row-gap: 2rem;
+			column-gap: 0;
 			height: 80vh;
-			margin-bottom: 50vh;
+			margin-bottom: 70vh;
 			align-items: center;
 			min-width: fit-content;
 			overflow-x: visible;
@@ -193,6 +189,7 @@ import TopNavigation from '../components/TopNavigation.astro';
 		}
 
 		:global(.scroll-indicator) {
+			grid-column: 1/-1;
 			justify-self: unset;
 		}
 
@@ -206,16 +203,6 @@ import TopNavigation from '../components/TopNavigation.astro';
 
 		.header-background:nth-of-type(3) {
 			grid-column: 2/-1;
-		}
-	}
-
-	@media screen and (min-width: 640px) and (max-width: 1240px) {
-		.header {
-			grid-template-columns: 1fr minmax(360px, 600px) minmax(50px, 200px) 1fr;
-		}
-
-		.header-background {
-			max-height: 260px;
 		}
 	}
 

@@ -76,7 +76,7 @@ const { name, subtitle, about, profilePicture } = Astro.props;
 
   .title {
     font-size: clamp(2rem, 5vw + 1rem, 3rem);
-    margin: 0;
+    margin: 0 0 0.5rem 0;
   }
 
   .subtitle { 
@@ -93,11 +93,11 @@ const { name, subtitle, about, profilePicture } = Astro.props;
 
   .about {
     font-weight: 300;
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-transform: none;
     color: var(--cl-white);
     margin-bottom: 3rem;
-    width: 70%;
+    width: 90%;
     max-width: 40ch;
     line-height: 170%;
   }
@@ -108,7 +108,7 @@ const { name, subtitle, about, profilePicture } = Astro.props;
       flex-direction: row-reverse;
       align-items: center;
       text-align: start;
-      gap: 1rem;
+
     }
 
     #profile-picture {
@@ -126,7 +126,7 @@ const { name, subtitle, about, profilePicture } = Astro.props;
     .image-container {
       position: relative;
       transform-origin: center;
-      transform: scale(1.2);
+      transform: scale(1.2) translateX(10%);
       aspect-ratio: 1/1;
     }
 
@@ -155,7 +155,6 @@ const { name, subtitle, about, profilePicture } = Astro.props;
       z-index: -1;
       aspect-ratio: 1/1;
     }
-
 
     .image-background::after {
       content: '';

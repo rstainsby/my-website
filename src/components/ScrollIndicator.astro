@@ -16,14 +16,14 @@
 
   .scroll-indicator::after {
     content: "";
-    top: 160%;
+    top: 16px;
     left: 50%;
-    position: absolute;
+    position: relative;
     display: block;
     width: 1px;
-    height: 30vh;
+    height: 18vh;
     background: var(--cl-secondary);
-    animation: draw-line 2s ease-in-out;
+    animation: draw-line 2s ease-in-out forwards;
   }
 
   .scroll-indicator span {
@@ -57,6 +57,8 @@
     animation-delay: 3.6s;
   }
 
+  
+
   @keyframes hop {
     0% {
       transform: translateY(0);
@@ -77,7 +79,27 @@
       height: 0;
     }
     100% {
-      height: 30vh;
+      height: 18vh;
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    .scroll-indicator {
+      position: absolute;
+      top: 110%;
+    }
+      
+    .scroll-indicator::after {
+      height: 40vh;
+    }
+
+    @keyframes draw-line {
+      0% {
+        height: 0;
+      }
+      100% {
+        height: 40vh;
+      }
     }
   }
 </style>

@@ -123,3 +123,9 @@ button {
   background-color: var(--cl-bg);
   color: inherit;
 }
+
+.container {
+  width: 90%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
